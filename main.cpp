@@ -7,7 +7,7 @@ bool reg = 0;
 
 void error_handle(int error_id, std::string message);
 
-Net::NetworkManager net("175.164.26.59", "test", 25562, 25564, error_handle);
+Net::NetworkManager net("127.0.0.1", "test", 25562, 25564, error_handle);
 
 void sigint_handler(int sig) { exit(1); }
 

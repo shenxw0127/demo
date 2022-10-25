@@ -6,7 +6,24 @@ using namespace cv;
 using namespace std;
 bool reg = 0;
 void error_handle(int error_id, std::string message);
-Net::NetworkManager net("127.0.0.1", "test", 25562, 25564, error_handle);
+void juxing(Mat a,Mat b) {
+    vector<vector<Point>> contours;
+    vector<Vec4i> hierarchy;
+    long double x, y;
+    findContours(a, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE, Point());
+    for (int t = 0; t < contours.size(); t++) {
+        RotatedRect rect = minAreaRect(contours[t]);
+        Point2f P[4];
+        rect.points(P);
+
+                for (int j = 0; j <= 3; j++) {
+                    line(b, P[j], P[(j + 1) % 4], Scalar(0, 0, 255), 2);
+                }
+
+
+    }
+}
+Net::NetworkManager net("127.0.0.1", "嘉然今天吃什么", 25562, 25564, error_handle);
 void sigint_handler(int sig) { exit(1); }
 int main() {
     signal(SIGINT, sigint_handler);
@@ -36,17 +53,24 @@ int main() {
             Mat origin,channels[3],red,blue;
             origin=img.clone();
             split(origin, channels);
-            subtract(channels[2],channels[0],red);
+            red =channels[2]-channels[0];
+            subtract(red,channels[1],red);
             subtract(channels[0],channels[2],blue);
-            Mat element = getStructuringElement(MORPH_RECT, Size(7, 7));
-            erode(channels[0],channels[0],element);
+            Mat element = getStructuringElement(MORPH_RECT, Size(1, 1));
+            //threshold(red,red,5, 255, THRESH_BINARY_INV);
+           // dilate(red,red,element);
+            //dilate(red,red,element);
+            //dilate(red,red,element);
+            //GaussianBlur(blue,blue,Size(9,9),15,0);
+           // juxing(blue,img);
 
             int nengliangjiguan=1;
             if(nengliangjiguan==1){
-                pitch=4;
+                pitch=0;
 
             }
             //------------展示-----------------
+            namedWindow("Red",0);
             imshow("Blue", blue);
             imshow("Green", channels[1]);
             imshow("Red", red);

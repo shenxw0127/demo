@@ -7,7 +7,4 @@
 <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/License-Secrecy-yellow"></a>
 <a href="https://neutdt.cn"><img alt="License" src="https://img.shields.io/badge/Home%20Page-T--DT-green"></a>
 
-<img src=".github/NEU.webp" width=300/>
-<img src=".github/t-dt.jpg" width=300/>
-
 </div>
